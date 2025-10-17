@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IBIZA ACTÚA: Taller de Interpretación</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Playfair+Display:wght@700&family=Anton&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Warm Neutrals & Ocean Blue -->
+    <!-- Application Structure Plan: A single-page, top-to-bottom narrative flow designed to guide the user from initial interest to enrollment. The structure is thematic: 1. Hero (Hook), 2. El Taller (Core Info with interactive tabs for Philosophy/Masters/Details), 3. Las Dinámicas (Interactive accordion for curriculum exploration), 4. Inversión (Price clarity), 5. Inscripción (Actionable CTA). The curriculum is now presented via an interactive accordion (JS) for detailed, non-linear exploration. -->
+    <!-- Visualization & Content Choices: - Report Info: Workshop title/hook -> Goal: Inform -> Presentation: Hero section -> Interaction: CTA button with smooth scroll. Justification: Immediate engagement. - Report Info: Workshop philosophy, masters, logistics -> Goal: Organize -> Presentation: Tabbed content block -> Interaction: JS-powered tab switching. Justification: Prevents info overload. - Report Info: Curriculum/Dynamics -> Goal: Educate & Engage -> Presentation: Accordion structure (HTML/Tailwind + JS) -> Interaction: Click to toggle visibility of monthly plans. Justification: Allows users to deep-dive into the 3-month structure. - Report Info: Investment cost -> Goal: Inform/Clarify -> Viz: Two-card comparison (HTML/CSS/Tailwind) showing Monthly vs. Quarterly price and savings. -> Interaction: None needed, the visual comparison is the focus. Justification: Clearly presents payment options and highlights the saving incentive. - Report Info: Contact details -> Goal: Action -> Presentation: Contact cards -> Interaction: Click-to-copy buttons. Justification: Reduces user friction to contact. CONFIRMATION: NO SVG/Mermaid used. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #FDFBF8; /* Warm Neutral */
+            color: #333;
+        }
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+        }
+        .font-anton {
+            font-family: 'Anton', sans-serif;
+        }
+        .accordion-content {
+            transition: all 0.3s ease-out;
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+            padding: 0 1.5rem;
+        }
+        .accordion-content.active {
+            max-height: 500px; /* Suficiente para el contenido */
+            opacity: 1;
+            padding: 1rem 1.5rem;
+        }
+    </style>
+</head>
+<body>
+    <header class="h-[60vh] md:h-screen text-white flex flex-col items-center justify-center p-4 text-center bg-gradient-to-br from-gray-900 to-amber-600">
+        <h1 class="text-4xl md:text-7xl font-anton tracking-widest uppercase">IBIZA ACTÚA</h1>
+        <p class="text-xl md:text-3xl mt-4 font-light">La Verdad del Actor.</p>
+        <p class="mt-6 max-w-2xl md:text-lg">Una transformación intensiva de 3 meses en el corazón de Ibiza. ¿Estás listo para llevar tu arte al nivel de la verdad?</p>
+        <a href="#inscripcion" class="mt-8 px-8 py-3 bg-[#005F73] hover:bg-[#0A9396] transition-colors duration-300 rounded-full text-lg font-semibold">Inscríbete Ahora</a>
+    </header>
+
+    <main class="container mx-auto px-4 py-16 md:py-24 space-y-24">
+        
+        <section id="taller" class="text-center">
+            <h2 class="text-3xl md:text-4xl font-bold text-[#001219]">El Taller</h2>
+            <p class="mt-4 max-w-3xl mx-auto text-lg text-gray-600">Este taller es un programa íntimo y limitado, donde destilaremos la esencia de las escuelas de interpretación más influyentes del mundo, creando un puente entre el rigor clásico español y la vanguardia americana.</p>
+            
+            <div class="mt-12">
+                <div class="border-b border-gray-200">
+                    <nav class="-mb-px flex justify-center space-x-4 md:space-x-8" aria-label="Tabs">
+                        <button id="tab-filosofia" class="tab-button whitespace-nowrap py-4 px-1 border-b-2 font-medium text-lg border-[#0A9396] text-[#005F73]">Filosofía</button>
+                        <button id="tab-maestros" class="tab-button whitespace-nowrap py-4 px-1 border-b-2 font-medium text-lg border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300">Métodos</button>
+                        <button id="tab-detalles" class="tab-button whitespace-nowrap py-4 px-1 border-b-2 font-medium text-lg border-[#0A9396] text-[#005F73]">Detalles</button>
+                    </nav>
+                </div>
+
+                <div class="mt-8 text-left">
+                    <div id="content-filosofia" class="tab-content hidden">
+                        <h3 class="font-bold text-2xl text-[#001219] mb-4">Mi Metodología: La Verdad del Actor</h3>
+                        <p class="text-lg text-gray-700 leading-relaxed">En este grupo de trabajo buscaremos la verdad escénica a través de la síntesis de años de estudio. Yo creo en un actor integral, que domina la técnica pero nunca pierde la conexión con su verdad emocional. El propósito de este viaje es desbloquear tu potencial único, dándote herramientas prácticas y una comprensión profunda del arte de actuar. Transmitir la verdad de estas enseñanzas es mi propósito.</p>
+                    </div>
+                    <div id="content-maestros" class="tab-content hidden">
+                        <h3 class="font-bold text-2xl text-[#001219] mb-4">Fusión de Enfoques (España & Global)</h3>
+                        <p class="text-lg text-gray-700 leading-relaxed mb-6">He destilado décadas de experiencia de las escuelas más prestigiosas. El objetivo no es replicar métodos, sino encontrar el único camino válido: el tuyo. Trabajaremos con herramientas que provienen de la profundidad emocional de Cristina Rota y Corazza, la precisión de Assumpta Serna, la acción orgánica de John Strasberg, la intensidad de Ivana Chubbuck y la mentalidad profesional de Bernard Hiller.</p>
+                        <p class="text-lg text-gray-700 leading-relaxed font-semibold">El foco está en el resultado, no en el nombre del método.</p>
+                    </div>
+                    <div id="content-detalles" class="tab-content">
+                        <ul class="space-y-4 text-lg">
+                            <li class="flex items-start"><span class="text-[#0A9396] font-bold mr-3">●</span><div><strong>Inicio:</strong> 1 de Noviembre</div></li>
+                            <li class="flex items-start"><span class="text-[#0A9396] font-bold mr-3">●</span><div><strong>Duración:</strong> 3 Meses (Nov, Dic, Ene)</div></li>
+                            <li class="flex items-start"><span class="text-[#0A9396] font-bold mr-3">●</span><div><strong>Dedicación:</strong> 4 horas, una vez por semana</div></li>
+                            <li class="flex items-start"><span class="text-[#0A9396] font-bold mr-3">●</span>
+                                <div>
+                                    <strong>Ubicación:</strong> Academia de Teatro Artes Pavón
+                                    <br>
+                                    <a href="https://maps.app.goo.gl/9yG4P6H67Q1G4P2H7" target="_blank" class="text-[#005F73] hover:underline transition-colors duration-200">
+                                        C/ dels Pirineus, 6, 07817 Sant Jordi de ses Salines, Illes Balears (Ver en Google Maps)
+                                    </a>
+                                </div>
+                            </li>
+                            <li class="flex items-start"><span class="text-[#0A9396] font-bold mr-3">●</span><div><strong>Plazas:</strong> Limitadas para garantizar un trabajo profundo e individualizado.</div></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="dinamicas" class="text-center">
+            <h2 class="text-3xl md:text-4xl font-bold text-[#001219]">Plan de Estudios Detallado por Meses</h2>
+            <p class="mt-4 max-w-3xl mx-auto text-lg text-gray-600">Una progresión lógica desde el desbloqueo personal hasta la interpretación avanzada. Cada mes construye sobre las bases del anterior.</p>
+            
+            <div class="mt-12 max-w-4xl mx-auto space-y-4 text-left">
+                
+                <!-- Mes 1: Cuerpo, Presencia y Verdad Personal -->
+                <div class="border border-gray-200 rounded-lg overflow-hidden shadow-md">
+                    <button class="accordion-header w-full p-6 bg-[#005F73] text-white font-bold text-xl flex justify-between items-center hover:bg-[#0A9396] transition-colors duration-300">
+                        <span>Mes 1: Cuerpo, Presencia y Verdad Personal (Noviembre)</span>
+                        <span class="text-2xl transform transition-transform duration-300">+</span>
+                    </button>
+                    <div id="mes-1-content" class="accordion-content">
+                        <h4 class="font-bold text-lg text-[#001219] mb-2">Foco: Desbloqueo, Conciencia y Monólogo.</h4>
+                        <ul class="list-disc list-inside space-y-2 text-gray-700">
+                            <li>La Escucha Activa y la Presencia: Ejercicios sensoriales (Rota / Strasberg) para el "Ser en la Escena".</li>
+                            <li>Liberación de Bloqueos: Trabajo físico y vocal para identificar y romper patrones habituales.</li>
+                            <li>Monólogo Inicial: Aplicación de los ejercicios de presencia a un monólogo corto asignado.</li>
+                            <li>Herramienta: Diario de la Verdad (para construir el 'banco emocional').</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Mes 2: Análisis, Deseo y Lucha -->
+                <div class="border border-gray-200 rounded-lg overflow-hidden shadow-md">
+                    <button class="accordion-header w-full p-6 bg-[#005F73] text-white font-bold text-xl flex justify-between items-center hover:bg-[#0A9396] transition-colors duration-300">
+                        <span>Mes 2: Análisis, Deseo y Lucha (Diciembre)</span>
+                        <span class="text-2xl transform transition-transform duration-300">+</span>
+                    </button>
+                    <div id="mes-2-content" class="accordion-content">
+                        <h4 class="font-bold text-lg text-[#001219] mb-2">Foco: Aplicación al Texto y Conflicto (Una Escena).</h4>
+                        <ul class="list-disc list-inside space-y-2 text-gray-700">
+                            <li>Análisis de Texto Profundo: Desglose en Acciones, Subtextos, Obstáculos y Deseos (Serna / Rota).</li>
+                            <li>Los 11 Pasos de la Verdad: Aplicación práctica de la metodología de Ivana Chubbuck a una escena asignada.</li>
+                            <li>La Confrontación: Trabajo con la escena para explorar el conflicto y el riesgo emocional.</li>
+                            <li>Material: Una escena dramática de 2 personas con alto potencial de subtexto.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Mes 3: Integración y Proyección -->
+                <div class="border border-gray-200 rounded-lg overflow-hidden shadow-md">
+                    <button class="accordion-header w-full p-6 bg-[#005F73] text-white font-bold text-xl flex justify-between items-center hover:bg-[#0A9396] transition-colors duration-300">
+                        <span>Mes 3: Integración y Proyección (Enero)</span>
+                        <span class="text-2xl transform transition-transform duration-300">+</span>
+                    </button>
+                    <div id="mes-3-content" class="accordion-content">
+                        <h4 class="font-bold text-lg text-[#001219] mb-2">Foco: Síntesis, Escena Final y Nivel Profesional.</h4>
+                        <ul class="list-disc list-inside space-y-2 text-gray-700">
+                            <li>Integración de los Métodos: Aplicación de la síntesis completa a una segunda escena larga y compleja.</li>
+                            <li>El Actor y el Casting: Mentalidad de éxito y simulación de cold readings (Bernard Hiller).</li>
+                            <li>Improvisación Avanzada: Desarrollo de la libertad escénica para la adaptación rápida.</li>
+                            <li>Cierre: Presentación de la escena final y feedback individualizado.</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="inversion" class="text-center">
+            <h2 class="text-3xl md:text-4xl font-bold text-[#001219]">Estructura de la Inversión (3 Meses)</h2>
+            <p class="mt-4 max-w-3xl mx-auto text-lg text-gray-600">Una oportunidad exclusiva para artistas comprometidos. Elige el plan que mejor se adapte a tu compromiso:</p>
+
+            <div class="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8 max-w-3xl mx-auto">
+                <!-- Opción 1: Mensual -->
+                <div class="p-8 rounded-xl shadow-lg border border-gray-200 bg-white">
+                    <h3 class="font-bold text-2xl text-[#005F73]">Pago Mensual</h3>
+                    <p class="text-5xl font-extrabold text-[#001219] mt-4">€180<span class="text-xl font-normal text-gray-500"> / mes</span></p>
+                    <p class="mt-4 text-gray-600">Ideal para mantener la flexibilidad. Pago al inicio de cada mes.</p>
+                    <p class="mt-2 text-sm text-gray-400">(Costo total del taller: €540)</p>
+                </div>
+
+                <!-- Opción 2: Trimestral (Ahorro) -->
+                <div class="p-8 rounded-xl shadow-xl border-2 border-[#EE9B00] bg-white relative">
+                    <div class="absolute top-0 right-0 -mt-3 -mr-3 bg-[#EE9B00] text-white text-xs font-semibold py-1 px-3 rounded-full uppercase">
+                        ¡AHORRA €40!
+                    </div>
+                    <h3 class="font-bold text-2xl text-[#EE9B00]">Pago Trimestral</h3>
+                    <p class="text-5xl font-extrabold text-[#001219] mt-4">€500<span class="text-xl font-normal text-gray-500"> / trimestre</span></p>
+                    <p class="mt-4 text-gray-600">Paga el taller completo por adelantado y obtén un descuento.</p>
+                    <p class="mt-2 text-sm text-gray-400">(Costo total del taller: €500)</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="biografia" class="text-center bg-white p-8 md:p-12 rounded-lg shadow-lg">
+            <h2 class="text-3xl md:text-4xl font-bold text-[#001219]">Sobre David Villaraco</h2>
+            <p class="mt-6 max-w-3xl mx-auto text-lg text-gray-700 leading-relaxed">David Villaraco es un actor y coach con una trayectoria de más de dos décadas en cine, televisión y teatro. Su búsqueda personal por la Verdad en la Interpretación lo ha llevado a formarse en los centros y con los maestros más influyentes a nivel internacional.</p>
+            <div class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-6 text-sm text-gray-600">
+                <p class="p-3 bg-gray-50 rounded-lg">Formación en España: Estudios de profundidad con Cristina Rota, el enfoque humano de Corazza y la precisión de Assumpta Serna.</p>
+                <p class="p-3 bg-gray-50 rounded-lg">Maestros Internacionales: Ha trabajado directamente con referentes como John Strasberg, la intensidad de Ivana Chubbuck y el coaching de carrera de Bernard Hiller.</p>
+                <p class="p-3 bg-gray-50 rounded-lg">Experiencia en Escena: Trayectoria consolidada en la industria, aplicando estos métodos en diversos proyectos audiovisuales y teatrales.</p>
+            </div>
+            <p class="mt-6 max-w-3xl mx-auto text-lg text-gray-700 leading-relaxed font-semibold">Este taller en Ibiza es el resultado de la destilación de toda esta experiencia, enfocada en llevar al actor a su máximo potencial de forma directa y práctica.</p>
+        </section>
+
+
+        <section id="inscripcion" class="text-center bg-[#EE9B00]/10 p-8 md:p-12 rounded-lg">
+            <h2 class="text-3xl md:text-4xl font-bold text-[#001219]">Reserva tu Transformación</h2>
+            <p class="mt-4 max-w-3xl mx-auto text-lg text-gray-600">¡No dejes pasar esta oportunidad! Asegura tu lugar en este grupo de trabajo exclusivo.</p>
+            
+            <div class="mt-12 bg-white p-8 rounded-xl shadow-lg max-w-xl mx-auto text-left">
+                <h3 class="font-bold text-2xl text-[#005F73] mb-4 text-center">Proceso de Inscripción</h3>
+                <p class="text-lg text-gray-700 leading-relaxed">
+                    Para formalizar tu interés y asegurar tu plaza en nuestro grupo reducido, sigue este único paso:
+                </p>
+                <div class="mt-6 space-y-4">
+                    <p class="flex items-start">
+                        <span class="text-[#0A9396] font-bold text-xl mr-3">1.</span>
+                        <span class="text-gray-700">Envía un email a davidvillaraco@gmail.com incluyendo tu currículum o una breve carta de motivación. Queremos conocer tu compromiso.</span>
+                    </p>
+                    <p class="flex items-start">
+                        <span class="text-[#0A9396] font-bold text-xl mr-3">2.</span>
+                        <span class="text-gray-700">Tu email es el primer paso: si tu perfil encaja con la dinámica del grupo, nos pondremos en contacto contigo para los detalles finales de la reserva.</span>
+                    </p>
+                </div>
+                <div class="mt-8 text-center">
+                    <button onclick="copyToClipboard('davidvillaraco@gmail.com', this)" class="w-full text-center flex items-center justify-center p-3 bg-[#005F73] hover:bg-[#0A9396] rounded-lg transition-colors text-white font-semibold">
+                        <span class="mr-2 text-xl">✉️</span> Copiar Email: davidvillaraco@gmail.com
+                    </button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-[#001219] text-white text-center py-8">
+        <p>&copy; 2025 IBIZA ACTÚA. Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        // Tab functionality
+        document.addEventListener('DOMContentLoaded', function () {
+            
+            // --- Tab Logic ---
+            const tabButtons = document.querySelectorAll('.tab-button');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            const setActiveTab = (buttonId) => {
+                const targetId = buttonId.replace('tab-', 'content-');
+
+                tabButtons.forEach(btn => {
+                    btn.classList.remove('border-[#0A9396]', 'text-[#005F73]');
+                    btn.classList.add('border-transparent', 'text-gray-500', 'hover:text-gray-700', 'hover:border-gray-300');
+                });
+                
+                const activeBtn = document.getElementById(buttonId);
+                activeBtn.classList.add('border-[#0A9396]', 'text-[#005F73]');
+                activeBtn.classList.remove('border-transparent', 'text-gray-500', 'hover:text-gray-700', 'hover:border-gray-300');
+
+                tabContents.forEach(content => {
+                    if (content.id === targetId) {
+                        content.classList.remove('hidden');
+                    } else {
+                        content.classList.add('hidden');
+                    }
+                });
+            };
+
+            // Initial load state: ensure 'Detalles' is visible on page load
+            setActiveTab('tab-detalles');
+            
+            // Attach click listeners
+            tabButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    setActiveTab(button.id);
+                });
+            });
+
+
+            // --- Accordion Logic for Dinamicas ---
+            const accordionHeaders = document.querySelectorAll('.accordion-header');
+
+            accordionHeaders.forEach(header => {
+                header.addEventListener('click', () => {
+                    const content = header.nextElementSibling;
+                    const icon = header.querySelector('span:last-child');
+
+                    // Close all others and reset icons
+                    accordionHeaders.forEach(otherHeader => {
+                        if (otherHeader !== header) {
+                            const otherContent = otherHeader.nextElementSibling;
+                            const otherIcon = otherHeader.querySelector('span:last-child');
+                            otherContent.classList.remove('active');
+                            otherIcon.classList.remove('rotate-45'); // Reset icon
+                        }
+                    });
+
+                    // Toggle current one
+                    content.classList.toggle('active');
+                    icon.classList.toggle('rotate-45');
+                });
+            });
+        });
+
+        function copyToClipboard(text, element) {
+            // Note: document.execCommand('copy') is used as navigator.clipboard might fail in some iFrame contexts.
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            textarea.style.position = 'fixed'; // Prevents scrolling to the bottom of the page
+            document.body.appendChild(textarea);
+            textarea.focus();
+            textarea.select();
+            try {
+                const successful = document.execCommand('copy');
+                if (successful) {
+                    const originalText = element.innerHTML;
+                    element.innerHTML = '¡Copiado!';
+                    setTimeout(() => {
+                        element.innerHTML = originalText;
+                    }, 2000);
+                } else {
+                    console.error('Fallback: Copying text command was unsuccessful.');
+                }
+            } catch (err) {
+                console.error('Fallback: Oops, unable to copy', err);
+            }
+            document.body.removeChild(textarea);
+        }
+    </script>
+</body>
+</html>
